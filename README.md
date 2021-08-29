@@ -283,3 +283,31 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   ```css
   h1 ~ p { ... }
   ```
+## The box model
+- Everything in CSS has a box around it.
+- In CSS we broadly have two types of boxes — **block boxes** and **inline boxes**. These characteristics refer to how the box behaves in terms of page flow and in relation to other boxes on the page.
+- Boxes also have an **inner display** type and an **outer display** type.
+  - Outer display types:
+    - **It details whether the box is block or inline.**
+    - **If a box has an outer display type of block, it will behave in the following ways:**
+      - The box will break onto a new line.
+      - The box will extend in the inline direction to fill the space available in its container. In most cases this means that the box will become as wide as its container, filling up 100% of the space available.
+      - The width and height properties are respected.
+      - Padding, margin and border will cause other elements to be pushed away from the box
+      - *Some HTML elements, such as `<h1>` and `<p>`, use block as their outer display type by default.*
+    - **If a box has an outer display type of inline, then:**
+      - The box will not break onto a new line.
+      - The width and height properties will not apply.
+      - Vertical padding, margins, and borders will apply but will not cause other inline boxes to move away from the box.
+      - Horizontal padding, margins, and borders will apply and will cause other inline boxes to move away from the box.
+      - Some HTML elements, such as `<a>`, `<span>`, `<em>` and `<strong>` use inline as their outer display type by default.
+  - Inner display types:
+    - It dictates how elements inside that box are laid out.
+    - By default, the elements inside a box are laid out in normal flow, which means that they behave just like any other block and inline elements
+- **The CSS box model as a whole applies to block boxes. Inline boxes use just some of the behavior defined in the box model.** The model defines how the different parts of a box — margin, border, padding, and content — work together to create a box that you can see on a page.
+- Parts of a box:
+  - **Content box:** The area where your content is displayed, which can be sized using properties like width and height.
+  - **Padding box:** The padding sits around the content as white space; its size can be controlled using padding and related properties.
+  - **Border box:** The border box wraps the content and any padding. Its size and style can be controlled using border and related properties.
+  - **Margin box:** The margin is the outermost layer, wrapping the content, padding, and border as whitespace between this box and other elements. Its size can be controlled using margin and related properties.
+  ![parts of a box](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/box-model.png)
