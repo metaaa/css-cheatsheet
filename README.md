@@ -165,6 +165,60 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   /* this only applies if the user moves their pointer over an element, typically a link. */
   a:hover { ... }
   ```
+  
+  Selector | Description
+  -------- | -----------
+  :active | Matches when the user activates (for example clicks on) an element.
+  :any-link | Matches both the :link and :visited states of a link.
+  :blank | Matches an <input> element whose input value is empty.
+  :checked | Matches a radio button or checkbox in the selected state.
+  :current | Matches the element, or an ancestor of the element, that is currently being displayed.
+  :default | Matches the one or more UI elements that are the default among a set of similar elements.
+  :dir | Select an element based on its directionality (value of the HTML dir attribute or CSS direction property).
+  :disabled | Matches user interface elements that are in an disabled state.
+  :empty | Matches an element that has no children except optionally white space.
+  :enabled | Matches user interface elements that are in an enabled state.
+  :first | In Paged Media, matches the first page.
+  :first-child | Matches an element that is first among its siblings.
+  :first-of-type | Matches an element which is first of a certain type among its siblings.
+  :focus | Matches when an element has focus.
+  :focus-visible | Matches when an element has focus and the focus should be visible to the user.
+  :focus-within | Matches an element with focus plus an element with a descendent that has focus.
+  :future | Matches the elements after the current element.
+  :hover | Matches when the user hovers over an element.
+  :indeterminate | Matches UI elements whose value is in an indeterminate state, usually checkboxes.
+  :in-range | Matches an element with a range when its value is in-range.
+  :invalid | Matches an element, such as an <input>, in an invalid state.
+  :lang | Matches an element based on language (value of the HTML lang attribute).
+  :last-child | Matches an element which is last among its siblings.
+  :last-of-type | Matches an element of a certain type that is last among its siblings.
+  :left | In Paged Media, matches left-hand pages.
+  :link | Matches unvisited links.
+  :local-link | Matches links pointing to pages that are in the same site as the current document.
+  :is() | Matches any of the selectors in the selector list that is passed in.
+  :not | Matches things not matched by selectors that are passed in as a value to this selector.
+  :nth-child | Matches elements from a list of siblings — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match elements 1, 3, 5, 7, etc. All the odd ones.)
+  :nth-of-type | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements) — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match that type of element, numbers 1, 3, 5, 7, etc. All the odd ones.)
+  :nth-last-child | Matches elements from a list of siblings, counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+  :nth-last-of-type | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements), counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element of that type in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+  :only-child | Matches an element that has no siblings.
+  :only-of-type | Matches an element that is the only one of its type among its siblings.
+  :optional | Matches form elements that are not required.
+  :out-of-range | Matches an element with a range when its value is out of range.
+  :past | Matches the elements before the current element.
+  :placeholder-shown | Matches an input element that is showing placeholder text.
+  :playing | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “playing”.
+  :paused | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “paused”.
+  :read-only | Matches an element if it is not user-alterable.
+  :read-write | Matches an element if it is user-alterable.
+  :required | Matches form elements that are required.
+  :right | In Paged Media, matches right-hand pages.
+  :root | Matches an element that is the root of the document.
+  :scope | Matches any element that is a scope element.
+  :valid | Matches an element such as an <input> element, in a valid state.
+  :target | Matches an element if it is the target of the current URL (i.e. if it has an ID matching the current URL fragment).
+  :visited | Matches visited links.
+
 - pseudo-elements
   - Pseudo-elements act as if you had added a whole new HTML element into the markup, rather than applying a class to existing elements.
   - Pseudo-elements start with a **double colon**.
@@ -193,19 +247,39 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
     } 
     ```
     - The use of the ::before and ::after pseudo-elements along with the content property is referred to as "Generated Content" in CSS
+
+  Selector | Description
+  -------- | -----------
+  ::after | Inserts a stylable element appearing after the originating element's actual content, if used with the content property with a value other than none.
+  ::before | Inserts a stylable element appearing before the originating element's actual content, if used with the content property with a value other than none.
+  ::first-letter | Matches the first letter of the element.
+  ::first-line | Matches the first line of the containing element.
+  ::grammar-error | Matches a portion of the document containing a grammar error as flagged by the browser.
+  ::marker | Matches the marker box of a list item, which typically contains a bullet or number.
+  ::selection | Matches the portion of the document that has been selected.
+  ::spelling-error | Matches a portion of the document containing a spelling error as flagged by the browser.
+    
 - descendant combinator
+    - The descendant combinator — typically represented by a single space ( ) character — **combines two selectors such that elements matched by the second selector are selected if they have an ancestor** (parent, parent's parent, parent's parent's parent, etc) **element matching the first selector.**
   ```css
   article p { ... }
   ```
 - child combinator
+    - The child combinator (>) is placed between two CSS selectors.
+    - **It matches only those elements matched by the second selector that are the direct children of elements matched by the first.**
+    - Descendent elements further down the hierarchy don't match.
   ```css
   article > p { ... }
   ```
 - adjacent sibling combinator
+    - The adjacent sibling selector (+) is placed between two CSS selectors.
+    - **It matches only those elements matched by the second selector that are the next sibling element of the first selector.**
+    - A common use case is to do something with a paragraph that follows a heading.
   ```css
   h1 + p { ... }
   ```
 - general sibling combinator
+    - If you want to select siblings of an element even if they are not directly adjacent, then you can use the general sibling combinator (~).
   ```css
   h1 ~ p { ... }
   ```
