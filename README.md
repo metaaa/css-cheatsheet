@@ -1,4 +1,4 @@
-# This article is just an extract of [this](https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax) superb article from Mozilla.
+### This article is just an extract of [this](https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax) superb article from Mozilla.
 
 ## What CSS is?
 - CSS stands for **Cascading Style Sheets**
@@ -28,16 +28,17 @@
     3. **Tens**: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall selector.
     4. **Ones**: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
 
-Selector | Thousands | Hundreds | Tens | Ones | Total specificity
--------- | --------- | -------- | ---- | ---- | -----------------
-h1 | 0 | 0 | 0 | 1 | 0001
-h1 + p::first-letter | 0 | 0 | 0 | 3 | 0003
-li > a[href*="en-US"] > .inline-warning | 0 | 0 | 2 | 2 | 0022
-#identifier | 0 | 1 | 0 | 0 | 0100
-No selector, with a rule inside an element's style attribute | 1 | 0 | 0 | 0 | 1000
+    Selector | Thousands | Hundreds | Tens | Ones | Total specificity
+    -------- | --------- | -------- | ---- | ---- | -----------------
+    h1 | 0 | 0 | 0 | 1 | 0001
+    h1 + p::first-letter | 0 | 0 | 0 | 3 | 0003
+    li > a[href*="en-US"] > .inline-warning | 0 | 0 | 2 | 2 | 0022
+    #identifier | 0 | 1 | 0 | 0 | 0100
+    No selector, with a rule inside an element's style attribute | 1 | 0 | 0 | 0 | 1000
   - The universal selector (*), combinators (+, >, ~, ' '), and negation pseudo-class (:not) **have no effect on specificity.**
 
-```
+- Some examples:
+```css
 /* specificity: 0101 */
 #outer a {
     background-color: red;
@@ -72,18 +73,17 @@ div li:nth-child(2) a:hover {
 div div .nav:nth-child(2) a:hover {
     border: 10px double black;
 }
-
-
-- The first two selectors are competing over the styling of the link's background color — the second one wins and
-makes the background color blue because it has an extra ID selector in the chain: its specificity is 201 vs. 101.
-- The third and fourth selectors are competing over the styling of the link's text color — the second one wins and
+```
+- *The first two selectors are competing over the styling of the link's background color — the second one wins and
+makes the background color blue because it has an extra ID selector in the chain: its specificity is 201 vs. 101.*
+- *The third and fourth selectors are competing over the styling of the link's text color — the second one wins and
 makes the text white because although it has one less element selector, the missing selector is swapped out for a
-class selector, which is worth ten rather than one. So the winning specificity is 113 vs. 104.
-- Selectors 5–7 are competing over the styling of the link's border when hovered. Selector six clearly loses to
+class selector, which is worth ten rather than one. So the winning specificity is 113 vs. 104.*
+- *Selectors 5–7 are competing over the styling of the link's border when hovered. Selector six clearly loses to
 five with a specificity of 23 vs. 24 — it has one fewer element selectors in the chain. Selector seven, however,
 beats both five and six — it has the same number of sub-selectors in the chain as five, but an element has been
-swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24.
-```
+swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24.*
+
 ### Importance
 - **!important** - is used to make a particular property and value the most specific thing, thus overriding the normal rules of the cascade.
 - The only way to override this !important declaration would be to include another !important declaration on a declaration with the same specificity later in the source order, or one with higher specificity.
@@ -107,58 +107,60 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 ### Type of selectors
 - type selector
   - A type selector is sometimes referred to as a tag name selector or element selector because it selects an HTML tag/element in your document.
-```
-h1 { ... }
-```
+  ```css
+  h1 { ... }
+  ```
 - class selector
   - It will select everything in the document with that class applied to it.
+  ```css
+  .box { ... }
+  ```
   - You can create a selector that will target specific elements with the class applied, by using the type selector for the element we want to target, with the class appended using a dot, with no white space in between.
-```
-.box { ... }
-```
-```
-span.box { ... }
-```
+  ```css
+  span.box { ... }
+  ```
 - id selector
   - An ID selector begins with a # rather than a dot character, but is used in the same way as a class selector.
   - However, an ID can be used only once per page, and elements can only have a single id value applied to them.
-```
-#unique { ... }
-```
+  ```css
+  #unique { ... }
+  ```
 - universal selector
   - The universal selector is indicated by an asterisk (*). **It selects everything in the document (or inside the parent element** if it is being chained together with another element and a descendant combinator). 
-```
-* { ... }
-```
+  ```css
+  * { ... }
+  ```
 - attribute selector
-```
-a[title] { ... }
-```
-- attribute selector with specific value
-```
-a[href="https://example.com"] { ... }
-```
+  - In CSS you can use attribute selectors to target elements with certain attributes.
+  - These selectors enable the selection of an element based on the presence of an attribute alone, or on various different matches against the value of the attribute.
+
+  Selector | Example | Description
+  -------- | ------- | -----------
+  [attr] | a[title] | Matches elements with an attr attribute (whose name is the value in square brackets).
+  [attr=value] | a[href="https://example.com"] | Matches elements with an attr attribute whose value is exactly value — the string inside the quotes.
+  [attr~=value] | p[class~="special"] | Matches elements with an attr attribute whose value is exactly value, or contains value in its (space separated) list of values.
+  [attr&#124;=value] | div[lang&#124;="zh"] | Matches elements with an attr attribute whose value is exactly value or begins with value immediately followed by a hyphen.
 - pseudo-classes
-```
-a:hover { ... }
-```
+  ```css
+  a:hover { ... }
+  ```
 - pseudo-elements
-```
-p::first-line { ... }
-```
+  ```css
+  p::first-line { ... }
+  ```
 - descendant combinator
-```
-article p { ... }
-```
+  ```css
+  article p { ... }
+  ```
 - child combinator
-```
-article > p { ... }
-```
+  ```css
+  article > p { ... }
+  ```
 - adjacent sibling combinator
-```
-h1 + p { ... }
-```
+  ```css
+  h1 + p { ... }
+  ```
 - general sibling combinator
-```
-h1 ~ p { ... }
-```
+  ```css
+  h1 ~ p { ... }
+  ```
