@@ -140,14 +140,59 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   [attr=value] | a[href="https://example.com"] | Matches elements with an attr attribute whose value is exactly value — the string inside the quotes.
   [attr~=value] | p[class~="special"] | Matches elements with an attr attribute whose value is exactly value, or contains value in its (space separated) list of values.
   [attr&#124;=value] | div[lang&#124;="zh"] | Matches elements with an attr attribute whose value is exactly value or begins with value immediately followed by a hyphen.
-- pseudo-classes
+  
+- substring matching selectors (part of attr selectors)
+  - These selectors allow for more advanced matching of substrings inside the value of your attribute.
+
+  Selector | Example | Description
+  -------- | ------- | -----------
+  [attr^=value] | li[class^="box-"] | Matches elements with an attr attribute, whose value begins with value.
+  [attr$=value] | li[class$="-box"] | Matches elements with an attr attribute whose value ends with value.
+  [attr*=value] | li[class*="box"] | Matches elements with an attr attribute whose value contains value anywhere within the string.
+  - If you want to **match attribute values case-insensitively you can use the value i before the closing bracket**. This flag tells the browser to match ASCII characters case-insensitively. Without the flag the values will be matched according to the case-sensitivity of the document language — in HTML's case it will be case sensitive.
   ```css
+  li[class^="a" i] {
+    color: red;
+  }
+  ```
+  - There is also a newer value **s**, which will **force case-sensitive matching in contexts** where matching is normally case-insensitive, **however this is less well supported in browsers** and isn't very useful in an HTML context.
+- pseudo-classes
+  - **A pseudo-class is a selector that selects elements that are in a specific state**, e.g. they are the first element of their type, or they are being hovered over by the mouse pointer. They tend to act as if you had applied a class to some part of your document, often helping you cut down on excess classes in your markup, and giving you more flexible, maintainable code.
+  - Pseudo-classes are keywords that **start with a colon**.
+  - It is valid to write pseudo-classes and elements without any element selector preceding them. However, usually you want more control than that, so you need to be more specific.
+  - **Some pseudo-classes only apply when the user interacts with the document in some way**. These user-action pseudo-classes, sometimes referred to as **dynamic pseudo-classes**, act as if a class had been added to the element when the user interacts with it.
+  ```css
+  /* this only applies if the user moves their pointer over an element, typically a link. */
   a:hover { ... }
   ```
 - pseudo-elements
+  - Pseudo-elements act as if you had added a whole new HTML element into the markup, rather than applying a class to existing elements.
+  - Pseudo-elements start with a **double colon**.
+  - Modern browsers support the early pseudo-elements with single- or double-colon syntax for backwards compatibility.
   ```css
   p::first-line { ... }
   ```
+  - **Generating content with ::before and ::after**
+    - There are a couple of special pseudo-elements, which are used along with the content property to insert content into your document using CSS.
+    - You could use these to insert a string of text.
+    - A more valid use of these pseudo-elements is to insert an icon.
+    ```css
+    .box::after {
+      content: " >"
+    }   
+    ```
+    - These pseudo-elements are also frequently used to insert an empty string, which can then be styled just like any element on the page.
+    ```css
+    p::before {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-color: rebeccapurple;
+      border: 1px solid black;
+    } 
+    ```
+    - The use of the ::before and ::after pseudo-elements along with the content property is referred to as "Generated Content" in CSS
 - descendant combinator
   ```css
   article p { ... }
