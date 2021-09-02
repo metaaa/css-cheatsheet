@@ -304,10 +304,58 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   - Inner display types:
     - It dictates how elements inside that box are laid out.
     - By default, the elements inside a box are laid out in normal flow, which means that they behave just like any other block and inline elements
+  - **display: inline-block:**
+    - Is a special value of display, which provides a middle ground between inline and block.
+    - This is useful for situations where you do not want an item to break onto a new line, but do want it to respect width and height and avoid the overlapping seen above.
+    - *This can be useful when you want to give a link a larger hit area by adding padding. `<a>` is an inline element like <span>; you can use display: inline-block to allow padding to be set on it, making it easier for a user to click the link.*
 - **The CSS box model as a whole applies to block boxes. Inline boxes use just some of the behavior defined in the box model.** The model defines how the different parts of a box — margin, border, padding, and content — work together to create a box that you can see on a page.
 - Parts of a box:
-  - **Content box:** The area where your content is displayed, which can be sized using properties like width and height.
-  - **Padding box:** The padding sits around the content as white space; its size can be controlled using padding and related properties.
-  - **Border box:** The border box wraps the content and any padding. Its size and style can be controlled using border and related properties.
-  - **Margin box:** The margin is the outermost layer, wrapping the content, padding, and border as whitespace between this box and other elements. Its size can be controlled using margin and related properties.
+  - **Content box:**
+    - The area where your content is displayed, which can be sized using properties like width and height.
+  - **Padding box:**
+    - The padding sits around the content as white space; its size can be controlled using padding and related properties.
+    - You **cannot have negative amounts of padding, so the value must be 0 or a positive value**.
+    - Padding is typically used to push the content away from the border.
+    - **Any background applied to your element will display behind the padding.**
+  - **Border box:**
+    - The border box wraps the content and any padding.
+    - Its size and style can be controlled using border and related properties.
+    - If you are using the standard box model, the size of the border is added to the width and height of the box.
+    - If you are using the alternative box model then the size of the border makes the content box smaller as it takes up some of that available width and height.
+  - **Margin box:**
+    - The margin is the outermost layer, wrapping the content, padding, and border as whitespace between this box and other elements.
+    - The margin is an invisible space around your box. It pushes other elements away from the box.
+    - Its size can be controlled using margin and related properties.
+    - Margins can have positive or negative values.
+    - Setting a negative margin on one side of your box can cause it to overlap other things on the page.
+    - Whether you are using the standard or alternative box model, the margin is always added after the size of the visible box has been calculated.
+    - **Margin collapsing:**
+      - A key thing to understand about margins is the concept of margin collapsing.
+      - **If** you have two elements whose margins touch, and **both margins are positive, those margins will combine** to become one margin, **and its size will be equal to the largest individual margin.**
+      - **If one margin is negative, its value will be subtracted from the total.**
+      - **Where both are negative, the margins will collapse and the largest value will be used.**
+      - *The margins of floating and absolutely positioned elements never collapse.*
+      - The **margins of adjacent siblings are collapsed** (except when the latter sibling needs to be cleared past floats).
+      - **Empty boxes:** If there is no border, padding, inline content, height, or min-height to separate a block's margin-top from its margin-bottom, then its top and bottom margins collapse.
+      - **If there is no border, padding, inline part, block formatting context created, or clearance to separate** the margin-top of **a block from** the margin-top of **one or more of its descendant blocks**; or no border, padding, inline content, height, or min-height to separate the margin-bottom of a block from the margin-bottom of one or more of its descendant blocks, **then those margins collapse. The collapsed margin ends up outside the parent.**
+      - These rules apply even to margins that are zero, so the margin of a descendant ends up outside its parent (according to the rules above) whether or not the parent's margin is zero.
   ![parts of a box](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/box-model.png)
+- **The margin is not counted towards the actual size of the box** — sure, it affects the total space that the box will take up on the page, but only the space outside the box. **The box's area stops at the border** — it does not extend into the margin.
+### The standard CSS box model
+- In the **standard box model**, if you give a box a width and a height attribute, this defines the width and height of the content box. Any padding and border is then added to that width and height to get the total size taken up by the box.
+  - Example:
+    ```css
+      .box {
+        width: 350px;
+        height: 150px;
+        margin: 10px;
+        padding: 25px;
+        border: 5px solid black;
+      }
+    ```
+    - *The actual space taken up by the box will be 410px wide (350 + 25 + 25 + 5 + 5) and 210px high (150 + 25 + 25 + 5 + 5).*
+    ![standard box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/standard-box-model.png)
+### The alternative CSS box model
+- **By default, browsers use the standard box model**. If you want to **turn on the alternative model** for an element, you do so **by setting** `box-sizing: border-box` on it.
+- Using this model, **any width is the width of the visible box on the page**, therefore the content area width is that width minus the width for the padding and border. The same CSS as used above would give the below result (width = 350px, height = 150px).
+![alternate box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/alternate-box-model.png)
