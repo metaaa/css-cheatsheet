@@ -30,10 +30,10 @@
 
     Selector | Thousands | Hundreds | Tens | Ones | Total specificity
     -------- | --------- | -------- | ---- | ---- | -----------------
-    h1 | 0 | 0 | 0 | 1 | 0001
-    h1 + p::first-letter | 0 | 0 | 0 | 3 | 0003
-    li > a[href*="en-US"] > .inline-warning | 0 | 0 | 2 | 2 | 0022
-    #identifier | 0 | 1 | 0 | 0 | 0100
+    `h1` | 0 | 0 | 0 | 1 | 0001
+    `h1 + p::first-letter` | 0 | 0 | 0 | 3 | 0003
+    `li > a[href*="en-US"] > .inline-warning` | 0 | 0 | 2 | 2 | 0022
+    `#identifier` | 0 | 1 | 0 | 0 | 0100
     No selector, with a rule inside an element's style attribute | 1 | 0 | 0 | 0 | 1000
   - The universal selector (*), combinators (+, >, ~, ' '), and negation pseudo-class (:not) **have no effect on specificity.**
 
@@ -136,9 +136,9 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 
   Selector | Example | Description
   -------- | ------- | -----------
-  [attr] | a[title] | Matches elements with an attr attribute (whose name is the value in square brackets).
-  [attr=value] | a[href="https://example.com"] | Matches elements with an attr attribute whose value is exactly value — the string inside the quotes.
-  [attr~=value] | p[class~="special"] | Matches elements with an attr attribute whose value is exactly value, or contains value in its (space separated) list of values.
+  [attr] | `a[title]` | Matches elements with an attr attribute (whose name is the value in square brackets).
+  [attr=value] | `a[href="https://example.com"]` | Matches elements with an attr attribute whose value is exactly value — the string inside the quotes.
+  [attr~=value] | `p[class~="special"]` | Matches elements with an attr attribute whose value is exactly value, or contains value in its (space separated) list of values.
   [attr&#124;=value] | div[lang&#124;="zh"] | Matches elements with an attr attribute whose value is exactly value or begins with value immediately followed by a hyphen.
   
 - substring matching selectors (part of attr selectors)
@@ -146,9 +146,9 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 
   Selector | Example | Description
   -------- | ------- | -----------
-  [attr^=value] | li[class^="box-"] | Matches elements with an attr attribute, whose value begins with value.
-  [attr$=value] | li[class$="-box"] | Matches elements with an attr attribute whose value ends with value.
-  [attr*=value] | li[class*="box"] | Matches elements with an attr attribute whose value contains value anywhere within the string.
+  [attr^=value] | `li[class^="box-"]` | Matches elements with an attr attribute, whose value begins with value.
+  [attr$=value] | `li[class$="-box"]` | Matches elements with an attr attribute whose value ends with value.
+  [attr*=value] | `li[class*="box"]` | Matches elements with an attr attribute whose value contains value anywhere within the string.
   - If you want to **match attribute values case-insensitively you can use the value i before the closing bracket**. This flag tells the browser to match ASCII characters case-insensitively. Without the flag the values will be matched according to the case-sensitivity of the document language — in HTML's case it will be case sensitive.
   ```css
   li[class^="a" i] {
