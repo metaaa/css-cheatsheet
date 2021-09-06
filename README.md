@@ -3,6 +3,11 @@
 ## What CSS is?
 
 - CSS stands for **Cascading Style Sheets**
+- CSS (Cascading Style Sheets) is a declarative language that controls how webpages look in the browser.
+- The browser applies CSS style declarations to selected elements to display them properly.
+- A style declaration contains the properties and their values, which determine how a webpage looks.
+- CSS is one of the three core Web technologies, along with HTML and JavaScript.
+- CSS usually styles HTML elements, but can be also used with other markup languages like SVG or XML.
 
 ## Basics
 
@@ -177,56 +182,56 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   
     Selector | Description
     -------- | -----------
-    :active | Matches when the user activates (for example clicks on) an element.
-    :any-link | Matches both the :link and :visited states of a link.
-    :blank | Matches an `<input>` element whose input value is empty.
-    :checked | Matches a radio button or checkbox in the selected state.
-    :current | Matches the element, or an ancestor of the element, that is currently being displayed.
-    :default | Matches the one or more UI elements that are the default among a set of similar elements.
-    :dir | Select an element based on its directionality (value of the HTML dir attribute or CSS direction property).
-    :disabled | Matches user interface elements that are in an disabled state.
-    :empty | Matches an element that has no children except optionally white space.
-    :enabled | Matches user interface elements that are in an enabled state.
-    :first | In Paged Media, matches the first page.
-    :first-child | Matches an element that is first among its siblings.
-    :first-of-type | Matches an element which is first of a certain type among its siblings.
-    :focus | Matches when an element has focus.
-    :focus-visible | Matches when an element has focus and the focus should be visible to the user.
-    :focus-within | Matches an element with focus plus an element with a descendent that has focus.
-    :future | Matches the elements after the current element.
-    :hover | Matches when the user hovers over an element.
-    :indeterminate | Matches UI elements whose value is in an indeterminate state, usually checkboxes.
-    :in-range | Matches an element with a range when its value is in-range.
-    :invalid | Matches an element, such as an `<input>`, in an invalid state.
-    :lang | Matches an element based on language (value of the HTML lang attribute).
-    :last-child | Matches an element which is last among its siblings.
-    :last-of-type | Matches an element of a certain type that is last among its siblings.
-    :left | In Paged Media, matches left-hand pages.
-    :link | Matches unvisited links.
-    :local-link | Matches links pointing to pages that are in the same site as the current document.
-    :is() | Matches any of the selectors in the selector list that is passed in.
-    :not | Matches things not matched by selectors that are passed in as a value to this selector.
-    :nth-child | Matches elements from a list of siblings — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match elements 1, 3, 5, 7, etc. All the odd ones.)
-    :nth-of-type | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements) — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match that type of element, numbers 1, 3, 5, 7, etc. All the odd ones.)
-    :nth-last-child | Matches elements from a list of siblings, counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
-    :nth-last-of-type | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements), counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element of that type in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
-    :only-child | Matches an element that has no siblings.
-    :only-of-type | Matches an element that is the only one of its type among its siblings.
-    :optional | Matches form elements that are not required.
-    :out-of-range | Matches an element with a range when its value is out of range.
-    :past | Matches the elements before the current element.
-    :placeholder-shown | Matches an input element that is showing placeholder text.
-    :playing | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “playing”.
-    :paused | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “paused”.
-    :read-only | Matches an element if it is not user-alterable.
-    :read-write | Matches an element if it is user-alterable.
-    :required | Matches form elements that are required.
-    :right | In Paged Media, matches right-hand pages.
-    :root | Matches an element that is the root of the document.
-    :scope | Matches any element that is a scope element.
-    :valid | Matches an element such as an `<input>` element, in a valid state.
-    :target | Matches an element if it is the target of the current URL (i.e. if it has an ID matching the current URL fragment).
-    :visited | Matches visited links.
+    `:active` | Matches when the user activates (for example clicks on) an element.
+    `:any-link` | Matches both the :link and :visited states of a link.
+    `:blank` | Matches an `<input>` element whose input value is empty.
+    `:checked` | Matches a radio button or checkbox in the selected state.
+    `:current` | Matches the element, or an ancestor of the element, that is currently being displayed.
+    `:default` | Matches the one or more UI elements that are the default among a set of similar elements.
+    `:dir` | Select an element based on its directionality (value of the HTML dir attribute or CSS direction property).
+    `:disabled` | Matches user interface elements that are in an disabled state.
+    `:empty` | Matches an element that has no children except optionally white space.
+    `:enabled` | Matches user interface elements that are in an enabled state.
+    `:first` | In Paged Media, matches the first page.
+    `:first-child` | Matches an element that is first among its siblings.
+    `:first-of-type` | Matches an element which is first of a certain type among its siblings.
+    `:focus` | Matches when an element has focus.
+    `:focus-visible` | Matches when an element has focus and the focus should be visible to the user.
+    `:focus-within` | Matches an element with focus plus an element with a descendent that has focus.
+    `:future` | Matches the elements after the current element.
+    `:hover` | Matches when the user hovers over an element.
+    `:indeterminate` | Matches UI elements whose value is in an indeterminate state, usually checkboxes.
+    `:in-range` | Matches an element with a range when its value is in-range.
+    `:invalid` | Matches an element, such as an `<input>`, in an invalid state.
+    `:lang` | Matches an element based on language (value of the HTML lang attribute).
+    `:last-child` | Matches an element which is last among its siblings.
+    `:last-of-type` | Matches an element of a certain type that is last among its siblings.
+    `:left` | In Paged Media, matches left-hand pages.
+    `:link` | Matches unvisited links.
+    `:local-link` | Matches links pointing to pages that are in the same site as the current document.
+    `:is()` | Matches any of the selectors in the selector list that is passed in.
+    `:not` | Matches things not matched by selectors that are passed in as a value to this selector.
+    `:nth-child` | Matches elements from a list of siblings — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match elements 1, 3, 5, 7, etc. All the odd ones.)
+    `:nth-of-type` | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements) — the siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match that type of element, numbers 1, 3, 5, 7, etc. All the odd ones.)
+    `:nth-last-child` | Matches elements from a list of siblings, counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+    `:nth-last-of-type` | Matches elements from a list of siblings that are of a certain type (e.g. <p> elements), counting backwards from the end. The siblings are matched by a formula of the form an+b (e.g. 2n + 1 would match the last element of that type in the sequence, then two elements before that, then two elements before that, etc. All the odd ones, counting from the end.)
+    `:only-child` | Matches an element that has no siblings.
+    `:only-of-type` | Matches an element that is the only one of its type among its siblings.
+    `:optional` | Matches form elements that are not required.
+    `:out-of-range` | Matches an element with a range when its value is out of range.
+    `:past` | Matches the elements before the current element.
+    `:placeholder-shown` | Matches an input element that is showing placeholder text.
+    `:playing` | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “playing”.
+    `:paused` | Matches an element representing an audio, video, or similar resource that is capable of being “played” or “paused”, when that element is “paused”.
+    `:read-only` | Matches an element if it is not user-alterable.
+    `:read-write` | Matches an element if it is user-alterable.
+    `:required` | Matches form elements that are required.
+    `:right` | In Paged Media, matches right-hand pages.
+    `:root` | Matches an element that is the root of the document.
+    `:scope` | Matches any element that is a scope element.
+    `:valid` | Matches an element such as an `<input>` element, in a valid state.
+    `:target` | Matches an element if it is the target of the current URL (i.e. if it has an ID matching the current URL fragment).
+    `:visited` | Matches visited links.
 
 - pseudo-elements
   - Pseudo-elements act as if you had added a whole new HTML element into the markup, rather than applying a class to existing elements.
@@ -571,3 +576,101 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   background-attachment: unset;
   ```
 
+## Borders
+
+- The border shorthand CSS property sets an element's border. It sets the values of `border-width`, `border-style`, and `border-color`. **The order of the values does not matter.**
+- Top, right, bottom, and left border properties also have mapped logical properties that relate to the writing mode of the document (e.g. left-to-right or right-to-left text, or top-to-bottom).
+- The border will be invisible if its style is not defined. This is because the style defaults to none.
+- Values:
+  - `<line-width>`
+    - Defines the width of the border, either as an explicit nonnegative `<length>` or a keyword. Defaults to medium if absent.
+    - If it's a `keyword`, it must be one of the following values:
+      - `thin`
+      - `medium`
+      - `thick`
+    - The border-width property may be specified using one, two, three, or four values.
+      - **When one value is specified**, it applies the same width to all four sides.
+      - **When two values are specified**, the first width applies to the top and bottom, the second to the left and right.
+      - **When three values are specified**, the first width applies to the top, the second to the left and right, the third to the bottom.
+      - **When four values are specified**, the widths apply to the top, right, bottom, and left in that order (**clockwise**).
+    - Because the specification doesn't define the exact thickness denoted by each keyword, the precise result when using one of them is implementation-specific. Nevertheless, they always follow the pattern `thin ≤ medium ≤ thick`, and the values are constant within a single document.
+  - `<line-style>`
+    - The border-style shorthand CSS property sets the line style for all four sides of an element's border. **Defaults to none if absent.**
+    - The border-style property may be specified using one, two, three, or four values. It works the same way as it was at the border-width. 
+    - Available options:
+      - `none`: Like the hidden keyword, displays no border. Unless a background-image is set, the computed value of the same side's border-width will be 0, even if the specified value is something else. In the case of table cell and border collapsing, the none value has the lowest priority: if any other conflicting border is set, it will be displayed.
+      - `hidden`: Like the none keyword, displays no border. Unless a background-image is set, the computed value of the same side's border-width will be 0, even if the specified value is something else. In the case of table cell and border collapsing, the hidden value has the highest priority: if any other conflicting border is set, it won't be displayed.
+      - `dotted`: Displays a series of rounded dots. The spacing of the dots is not defined by the specification and is implementation-specific. The radius of the dots is half the computed value of the same side's border-width.
+      - `dashed`: Displays a series of short square-ended dashes or line segments. The exact size and length of the segments are not defined by the specification and are implementation-specific.
+      - `solid`: Displays a single, straight, solid line.
+      - `double`: Displays two straight lines that add up to the pixel size defined by border-width.
+      - `groove`: Displays a border with a carved appearance. It is the opposite of ridge.
+      - `ridge`: Displays a border with an extruded appearance. It is the opposite of groove.
+      - `inset`: Displays a border that makes the element appear embedded. It is the opposite of outset. When applied to a table cell with border-collapse set to collapsed, this value behaves like groove.
+      - `outset`: Displays a border that makes the element appear embossed. It is the opposite of inset. When applied to a table cell with border-collapse set to collapsed, this value behaves like ridge.
+  - `<color>`
+- As with all shorthand properties, any omitted sub-values will be set to their initial value. Importantly, border cannot be used to specify a custom value for border-image, but instead sets it to its initial value, i.e., none.
+- Borders and outlines are very similar. However, outlines differ from borders in the following ways:
+  - Outlines never take up space, as they are drawn outside of an element's content.
+  - According to the spec, outlines don't have to be rectangular, although they usually are.
+
+```css
+/* style */
+border: solid;
+
+/* width | style */
+border: 2px dotted;
+
+/* style | color */
+border: outset #f33;
+
+/* width | style | color */
+border: medium dashed green;
+
+/* Global values */
+border: inherit;
+border: initial;
+border: unset;
+```
+  
+#### Rounded corners
+
+- Rounding corners on a box is achieved by using the border-radius property and associated longhands which relate to each corner of the box.
+- Two lengths or percentages may be used as a value, the first value defining the horizontal radius, and the second the vertical radius.
+- The radius applies to the whole background, even if the element has no border; the exact position of the clipping is defined by the `background-clip` property.
+- **The border-radius property does not apply to table elements when border-collapse is collapse.**
+- The border-radius property is specified as:
+  - one, two, three, or four `<length>` or `<percentage>` values. This is used to set a single radius for the corners.
+  - followed optionally by `/` and one, two, three, or four `<length>` or `<percentage>` values. This is used to set an additional radius, so you can have elliptical corners.
+
+### Border image
+
+- The border-image CSS property draws an image around a given element. It replaces the element's regular border.
+- **If the computed value of border-image-source is none, or if the image cannot be displayed, the border-style will be displayed instead.** Indeed, this is required according to the specification, although not all browsers implement this requirement.
+- Values:
+  - `border-image-source`: The source image. See border-image-source.
+  - `border-image-slice`: The dimensions for slicing the source image into regions. Up to four values may be specified. See border-image-slice.
+  - `border-image-width`: The width of the border image. Up to four values may be specified. See border-image-width.
+  - `border-image-outset`: The distance of the border image from the element's outside edge. Up to four values may be specified. See border-image-outset.
+  - `border-image-repeat`: Defines how the edge regions of the source image are adjusted to fit the dimensions of the border image. Up to two values may be specified. See border-image-repeat.
+
+```css
+/* source | slice */
+border-image: linear-gradient(red, blue) 27;
+
+/* source | slice | repeat */
+border-image: url("/images/border.png") 27 space;
+
+/* source | slice | width */
+border-image: linear-gradient(red, blue) 27 / 35px;
+
+/* source | slice | width | outset | repeat */
+border-image: url("/images/border.png") 27 23 / 50px 30px / 1rem round space;
+
+/* Global values */
+border-image: inherit;
+border-image: initial;
+border-image: revert;
+border-image: unset;
+
+```
