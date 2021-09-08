@@ -674,3 +674,77 @@ border-image: revert;
 border-image: unset;
 
 ```
+
+### Outlines vs borders
+
+- Borders and outlines are very similar. However, outlines differ from borders in the following ways:
+  - Outlines never take up space, as they are drawn outside of an element's content, and may overlap other content.
+  - According to the spec, outlines don't have to be rectangular, although they usually are.
+- The outline CSS shorthand property set all the outline properties in a single declaration.
+- The `outline` property is a shorthand for the following CSS properties:
+  - `outline-color`:
+    - The outline-color property is specified as a `<color>` or the keyword `invert`, which performs a color inversion of the background. Note that browsers are not required to support this value; if they don't, this keyword is considered invalid.
+  - `outline-style`:
+    - The outline-style CSS property sets the style of an element's outline. An outline is a line that is drawn around an element, outside the border.
+    - The outline-style property is specified as any one of the values listed below:
+      - `auto`: Permits the user agent to render a custom outline style.
+      - `none`: No outline is used. The outline-width is 0.
+      - `dotted`: The outline is a series of dots.
+      - `dashed`: The outline is a series of short line segments.
+      - `solid`: The outline is a single line.
+      - `double`: The outline is two single lines. The outline-width is the sum of the two lines and the space between them.
+      - `groove`: The outline looks as though it were carved into the page.
+      - `ridge`: The opposite of groove: the outline looks as though it were extruded from the page.
+      - `inset`: The outline makes the box look as though it were embedded in the page.
+      - `outset`: The opposite of inset: the outline makes the box look as though it were coming out of the page.
+  - `outline-width`:
+    - The CSS outline-width property sets the thickness of an element's outline. An outline is a line that is drawn around an element, outside the border.
+    - The outline-width property is specified as any one of the values listed below.
+      - `<length>`: The width of the outline specified as a `<length>`.
+      - `thin`: Depends on the user agent. Typically equivalent to 1px in desktop browsers (including Firefox).
+      - `medium`: Depends on the user agent. Typically equivalent to 3px in desktop browsers (including Firefox).
+      - `thick`: Depends on the user agent. Typically equivalent to 5px in desktop browsers (including Firefox).
+- The outline will be invisible for many elements if its style is not defined. This is because the style defaults to `none`. **A notable exception is input elements, which are given default styling by browsers.**
+- The outline property may be specified using one, two, or three of the values listed below. The order of the values does not matter.
+  ```css
+  /* style */
+  outline: solid;
+  
+  /* color | style */
+  outline: #f66 dashed;
+  
+  /* style | width */
+  outline: inset thick;
+  
+  /* color | style | width */
+  outline: green solid 3px;
+  
+  /* Global values */
+  outline: inherit;
+  outline: initial;
+  outline: revert;
+  outline: unset;
+  ```
+## Writing modes
+
+- In recent years, CSS has evolved in order to better support different directionality of content, including right-to-left but also top-to-bottom content (such as Japanese) — these different directionalities are called writing modes.
+- A writing mode in CSS refers to whether the text is running horizontally or vertically.
+- You don't need to be working in a language which uses a vertical writing mode to want to do this — you could also change the writing mode of parts of your layout for creative purposes.
+- The `writing-mode` property lets us switch from one writing mode to another.
+  - This property specifies the block flow direction, which is the direction in which block-level containers are stacked, and the direction in which inline-level content flows within a block container. Thus, it also determines the ordering of block-level content.
+  - When set for an entire document, it should be set on the root element (html element for HTML documents).
+  - Available values:
+    - `horizontal-tb`: For ltr scripts, content flows horizontally from left to right. For rtl scripts, content flows horizontally from right to left. The next horizontal line is positioned below the previous line.
+    - `vertical-rl`: For ltr scripts, content flows vertically from top to bottom, and the next vertical line is positioned to the left of the previous line. For rtl scripts, content flows vertically from bottom to top, and the next vertical line is positioned to the right of the previous line.
+    - `vertical-lr`: For ltr scripts, content flows vertically from top to bottom, and the next vertical line is positioned to the right of the previous line. For rtl scripts, content flows vertically from bottom to top, and the next vertical line is positioned to the left of the previous line.
+    - `sideways-rl`[experimental]: For ltr scripts, content flows vertically from bottom to top. For rtl scripts, content flows vertically from top to bottom. All the glyphs, even those in vertical scripts, are set sideways toward the right.
+    - `sideways-lr`[experimental]: For ltr scripts, content flows vertically from top to bottom. For rtl scripts, content flows vertically from bottom to top. All the glyphs, even those in vertical scripts, are set sideways toward the left.
+    - *There are several deprecated values which are available for SVG1 documents only (lr, lr-tb, rl, tb, tb-rl, tb-lr).*
+
+### Writing modes and block and inline layout
+
+- Block and inline is tied to the writing mode of the document, and not the physical screen.
+- Blocks are only displayed from the top to the bottom of the page if you are using a writing mode that displays text horizontally, such as English.
+- When we switch the writing mode, we are changing which direction is block and which is inline.
+- In a horizontal-tb writing mode the block direction runs from top to bottom; in a vertical-rl writing mode the block direction runs right-to-left horizontally. So the **block dimension** is always the direction blocks are displayed on the page in the writing mode in use. The **inline dimension** is always the direction a sentence flows.
+
