@@ -1,5 +1,3 @@
-### This article is just an extract of [this](https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax) superb article from Mozilla.
-
 ## What CSS is?
 
 - CSS stands for **Cascading Style Sheets**
