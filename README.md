@@ -21,6 +21,7 @@
 - **A statement is a building block that begins with any non-space characters and ends at the first closing brace or semi-colon** (outside a string, non-escaped and not included into another {}, () or [] pair).
 
   ![statements diagram](https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax/css_syntax_-_statements_venn_diag.png)
+  
 - **At-rules that start with an at sign, '@'** (U+0040 COMMERCIAL AT), **followed by an identifier and then continuing up to the end of the statement, that is up to the next semi-colon (;)** outside of a block, or the end of the next block. **Each type of at-rules, defined by the identifier, may have its own internal syntax, and semantics** of course. They are used to convey meta-data information (like @charset or @import), conditional information (like @media or @document), or descriptive information (like @font-face).
 
 ### Cascade
@@ -328,6 +329,7 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 - Parts of a box:
 
   ![parts of a box](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/box-model.png)
+  
   - **Content box:**
     - The area where your content is displayed, which can be sized using properties like width and height.
   - **Padding box:**
@@ -374,6 +376,7 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
     - *The actual space taken up by the box will be 410px wide (350 + 25 + 25 + 5 + 5) and 210px high (150 + 25 + 25 + 5 + 5).*
   
   ![standard box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/standard-box-model.png)
+
 ### The alternative CSS box model
 
 - **By default, browsers use the standard box model**. If you want to **turn on the alternative model** for an element, you do so **by setting** `box-sizing: border-box` on it.
@@ -747,4 +750,66 @@ border-image: unset;
 - Blocks are only displayed from the top to the bottom of the page if you are using a writing mode that displays text horizontally, such as English.
 - When we switch the writing mode, we are changing which direction is block and which is inline.
 - In a horizontal-tb writing mode the block direction runs from top to bottom; in a vertical-rl writing mode the block direction runs right-to-left horizontally. So the **block dimension** is always the direction blocks are displayed on the page in the writing mode in use. The **inline dimension** is always the direction a sentence flows.
+- Dimensions when in a horizontal writing mode:
+  
+  ![dimensions when in a horizontal writing mode](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Handling_different_text_directions/horizontal-tb.png)
+  
+- Dimensions in a vertical writing mode:
+  
+  ![dimensions in a vertical writing mode](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Handling_different_text_directions/vertical.png)
+
+### Direction
+
+- Due to the fact that writing mode and direction of text can change, newer CSS layout methods do not refer to left and right, and top and bottom. Instead they will talk about start and end along with this idea of inline and block.
+- The property mapped to width when in a horizontal writing mode is called **inline-size** — it refers to the size in the inline dimension.
+- The property for height is named **block-size** and is the size in the block dimension.
+
+### Logical margin, border, and padding properties
+
+- Physical values of `top`, `right`, `bottom`, and `left` have mappings, to logical values — `block-start`, `inline-end`, `block-end`, and `inline-start`.
+
+  ```css
+  /**
+    The 2 examples below are identical.
+  */
+  .logical {
+    margin-block-start: 20px;
+    padding-inline-end: 2em;
+    padding-block-start: 2px;
+    border-block-start: 5px solid pink;
+    border-inline-end: 10px dotted rebeccapurple;
+    border-block-end: 1em double orange;
+    border-inline-start: 1px solid black;
+  }
+  
+  .physical {
+    margin-top: 20px;
+    padding-right: 2em;
+    padding-top: 2px;
+    border-top: 5px solid pink;
+    border-right: 10px dotted rebeccapurple;
+    border-bottom: 1em double orange;
+    border-left: 1px solid black;
+  }
+  ```
+
+- Currently, only Firefox supports flow relative values  for float. If you are using Google Chrome or Microsoft Edge, you may find that the image did not float.
+
+## Overflow
+
+- Overflow happens when there is too much content to fit in a box.
+- Wherever possible, CSS does not hide content. This would cause data loss. Instead, CSS overflows in visible ways.
+- The  `overflow` property is how you take control of an element's overflow. The default value of overflow is `visible`.
+  - The overflow property is specified as one or two keywords chosen from the list of values below. If two keywords are specified, the first applies to `overflow-x` and the second to `overflow-y`. Otherwise, both `overflow-x` and `overflow-y` are set to the same value.
+  - Values:
+    - `visible`: Content is not clipped and may be rendered outside the padding box.
+    - `hidden`: Content is clipped if necessary to fit the padding box. No scrollbars are provided, and no support for allowing the user to scroll (such as by dragging or using a scroll wheel) is allowed. The content can be scrolled programmatically (for example, by setting the value of a property such as offsetLeft), so the element is still a scroll container.
+    - `clip`: Similar to hidden, the content is clipped to the element's padding box. The difference between clip and hidden is that the clip keyword also forbids all scrolling, including programmatic scrolling. The box is not a scroll container, and does not start a new formatting context. If you wish to start a new formatting context, you can use display: flow-root to do so.
+    - `scroll`: Content is clipped if necessary to fit the padding box. Browsers always display scrollbars whether or not any content is actually clipped, preventing scrollbars from appearing or disappearing as content changes. Printers may still print overflowing content.
+    - `auto`: Depends on the user agent. If content fits inside the padding box, it looks the same as visible, but still establishes a new block formatting context. Desktop browsers provide scrollbars if content overflows.
+    - `overlay` (**DEPRECATED**): Behaves the same as auto, but with the scrollbars drawn on top of content instead of taking up space. Only supported in WebKit-based (e.g., Safari) and Blink-based (e.g., Chrome or Opera) browsers.
+  - Specifying a value other than visible (the default) or clip creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.
+  - Setting one axis to visible (the default) while setting the other to a different value results in visible behaving as auto.
+  - In order for overflow to have an effect, the block-level container must have either a set height (`height` or `max-height`) or `white-space` set to `nowrap`.
+   - The JavaScript `Element.scrollTop` property may be used to scroll an HTML element even when overflow is set to `hidden`.
 
