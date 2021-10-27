@@ -395,12 +395,12 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 
 ### Background images
 
-- The background-image property enables the display of an image in the background of an element.
-- By default, the large image is not scaled down to fit the box, so we only see a small corner of it, whereas the small image is tiled to fill the box.
-- If you specify a background color in addition to a background image then the image displays on top of the color.
-- If a specified image cannot be drawn (for example, when the file denoted by the specified URI cannot be loaded), browsers handle it as they would a none value.
-- Even if the images are opaque and the color won't be displayed in normal circumstances, web developers should always specify a background-color. If the images cannot be loaded—for instance, when the network is down—the background color will be used as a fallback.
-- To specify multiple background images, supply multiple values, separated by a comma.
+- The `background-image` property enables the display of an image in the background of an element.
+- **By default, the large image is not scaled down** to fit the box, so we only see a small corner of it, **whereas the small image is tiled to fill the box**.
+- **If you specify a background color in addition to a background image then the image displays on top of the color.**
+- **If a specified image cannot be drawn** (for example, when the file denoted by the specified URI cannot be loaded), **browsers handle it as they would a none value.**
+- Even if the images are opaque and the color won't be displayed in normal circumstances, **web developers should always specify a background-color**. If the images cannot be loaded—for instance, when the network is down—the background color will be used as a fallback.
+- **To specify multiple background images, supply multiple values, separated by a comma**.
 
 #### Controlling background-repeat
 
@@ -410,7 +410,7 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
   - **no-repeat** — The image is not repeated (and hence the background image painting area will not necessarily be entirely covered). The position of the non-repeated background image is defined by the background-position CSS property.
   - **repeat-x** — repeat horizontally.
   - **repeat-y** — repeat vertically.
-  - **space** — The image is repeated as much as possible without clipping. The first and last images are pinned to either side of the element, and whitespace is distributed evenly between the images. The background-position property is ignored unless only one image can be displayed without clipping. The only case where clipping happens using space is when there isn't enough room to display one image.
+  - **space** — **The image is repeated as much as possible without clipping. The first and last images are pinned to either side of the element, and whitespace is distributed evenly between the images.** The background-position property is ignored unless only one image can be displayed without clipping. The only case where clipping happens using space is when there isn't enough room to display one image.
   - **round** — As the allowed space increases in size, the repeated images will stretch (leaving no gaps) until there is room (space left >= half of the image width) for another one to be added. When the next image is added, all of the current ones compress to allow room.
   ```css
   /* Keyword values */
@@ -729,10 +729,10 @@ border-image: unset;
 ## Writing modes
 
 - In recent years, CSS has evolved in order to better support different directionality of content, including right-to-left but also top-to-bottom content (such as Japanese) — these different directionalities are called writing modes.
-- A writing mode in CSS refers to whether the text is running horizontally or vertically.
+- **A writing mode in CSS refers to whether the text is running horizontally or vertically.**
 - You don't need to be working in a language which uses a vertical writing mode to want to do this — you could also change the writing mode of parts of your layout for creative purposes.
 - The `writing-mode` property lets us switch from one writing mode to another.
-  - This property specifies the block flow direction, which is the direction in which block-level containers are stacked, and the direction in which inline-level content flows within a block container. Thus, it also determines the ordering of block-level content.
+  - **This property specifies the block flow direction, which is the direction in which block-level containers are stacked, and the direction in which inline-level content flows within a block container.** Thus, it also determines the ordering of block-level content.
   - When set for an entire document, it should be set on the root element (html element for HTML documents).
   - Available values:
     - `horizontal-tb`: For ltr scripts, content flows horizontally from left to right. For rtl scripts, content flows horizontally from right to left. The next horizontal line is positioned below the previous line.
@@ -744,7 +744,7 @@ border-image: unset;
 
 ### Writing modes and block and inline layout
 
-- Block and inline is tied to the writing mode of the document, and not the physical screen.
+- **Block and inline is tied to the writing mode of the document, and not the physical screen.**
 - Blocks are only displayed from the top to the bottom of the page if you are using a writing mode that displays text horizontally, such as English.
 - When we switch the writing mode, we are changing which direction is block and which is inline.
 - In a horizontal-tb writing mode the block direction runs from top to bottom; in a vertical-rl writing mode the block direction runs right-to-left horizontally. So the **block dimension** is always the direction blocks are displayed on the page in the writing mode in use. The **inline dimension** is always the direction a sentence flows.
@@ -809,5 +809,7 @@ border-image: unset;
   - Specifying a value other than visible (the default) or clip creates a new block formatting context. This is necessary for technical reasons — if a float intersected with the scrolling element it would forcibly rewrap the content after each scroll step, leading to a slow scrolling experience.
   - Setting one axis to visible (the default) while setting the other to a different value results in visible behaving as auto.
   - In order for overflow to have an effect, the block-level container must have either a set height (`height` or `max-height`) or `white-space` set to `nowrap`.
-   - The JavaScript `Element.scrollTop` property may be used to scroll an HTML element even when overflow is set to `hidden`.
-
+  - The JavaScript `Element.scrollTop` property may be used to scroll an HTML element even when overflow is set to `hidden`.
+  - Using `overflow: scroll`, browsers with visible scrollbars will always display them—even if there is not enough content to overflow.
+  - If **two keywords are specified**, the first applies to overflow-x and the second applies to overflow-y. Otherwise, both overflow-x and overflow-y are set to the same value.
+  - When you use a value of overflow such as `scroll` or `auto`, you create a **Block Formatting Context** (BFC). **The content of the box that you have changed the value of overflow for acquires a self-contained layout.** Content outside the container cannot poke into the container, and nothing can poke out of that container into the surrounding layout. **This enables scrolling behavior, as all box content needs to be contained and not overlap, in order to create a consistent scrolling experience.**
