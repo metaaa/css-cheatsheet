@@ -813,3 +813,90 @@ border-image: unset;
   - Using `overflow: scroll`, browsers with visible scrollbars will always display them—even if there is not enough content to overflow.
   - If **two keywords are specified**, the first applies to overflow-x and the second applies to overflow-y. Otherwise, both overflow-x and overflow-y are set to the same value.
   - When you use a value of overflow such as `scroll` or `auto`, you create a **Block Formatting Context** (BFC). **The content of the box that you have changed the value of overflow for acquires a self-contained layout.** Content outside the container cannot poke into the container, and nothing can poke out of that container into the surrounding layout. **This enables scrolling behavior, as all box content needs to be contained and not overlap, in order to create a consistent scrolling experience.**
+
+### Wrapping and breaking text
+
+- In CSS, if you have an **unbreakable string such as a very long word, by default it will overflow any container** that is too small for it in the inline direction. CSS will display overflow in this way, **because doing something else could cause data loss.**
+- To find the minimum size of the box that will contain its contents with no overflows, set the `width` or `inline-size` property of the box to `min-content`.
+- Using `min-content` is therefore one possibility for overflowing boxes. If it is possible to allow the box to grow to be the minimum size required for the content, but no bigger
+
+#### Breaking long words
+
+- **If the box needs to be a fixed size**, or you are keen to ensure that long words can't overflow, **then `overflow-wrap` property will break a word once it is too long to fit** on a line by itself.
+  - In contrast to `word-break`, **`overflow-wrap` will only create a break if an entire word cannot be placed on its own line without overflowing**.
+  - *The property was originally a nonstandard and unprefixed Microsoft extension called word-wrap, and was implemented by most browsers with the same name. It has since been renamed to overflow-wrap, with word-wrap being an alias.*
+  - The overflow-wrap property is specified as a single keyword:
+    - `normal`: **Lines may only break at normal word break points** (such as a space between two words).
+    - `anywhere`: **To prevent overflow, an otherwise unbreakable string of characters** — like a long word or URL — **may be broken at any point** if there are no otherwise-acceptable break points in the line. No hyphenation character is inserted at the break point. Soft wrap opportunities introduced by the word break are considered when calculating min-content intrinsic sizes.
+    - `break-word`: **The same as the anywhere value**, with normally unbreakable words allowed to be broken at arbitrary points if there are no otherwise acceptable break points in the line, **but soft wrap opportunities introduced by the word break are NOT considered when calculating min-content intrinsic sizes**.
+
+  ```css
+  /* Keyword values */
+  overflow-wrap: normal;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+
+  /* Global values */
+  overflow-wrap: inherit;
+  overflow-wrap: initial;
+  overflow-wrap: revert;
+  overflow-wrap: unset;
+  ```
+
+- The `word-break` property will break the word at the point it overflows. It **will cause a break-even if placing the word onto a new line would allow it to display without breaking**.
+- The word-break property is specified as a single keyword:
+  - `normal`: Use the default line break rule.
+  - `break-all`: To prevent overflow, word breaks should be inserted between any two characters (excluding Chinese/Japanese/Korean text).
+  - `keep-all`: Word breaks should not be used for Chinese/Japanese/Korean (CJK) text. Non-CJK text behavior is the same as for normal.
+  - `break-word` (**DEPRECATED**): Has the same effect as word-break: normal and overflow-wrap: anywhere, regardless of the actual value of the overflow-wrap property.
+- In contrast to `word-break: break-word` and `overflow-wrap: break-word`, **`word-break: break-all` will create a break at the exact place where text would otherwise overflow its container (even if putting an entire word on its own line would negate the need for a break)**.
+
+  ```css
+  /* Keyword values */
+  word-break: normal;
+  word-break: break-all;
+  word-break: keep-all;
+  word-break: break-word; /* deprecated */
+
+  /* Global values */
+  word-break: inherit;
+  word-break: initial;
+  word-break: revert;
+  word-break: unset;
+  ```
+
+#### Adding hyphens
+
+- **The `hyphens` CSS property specifies how words should be hyphenated when text wraps across multiple lines**. It can prevent hyphenation entirely, hyphenate at manually-specified points within the text, or let the browser automatically insert hyphens where appropriate.
+- **The `&shy;` character is used to indicate a potential place to insert a hyphen when `hyphens: manual;` is specified.**
+- **Hyphenation rules are language-specific.** In HTML, the language is determined by the lang attribute, and browsers will hyphenate only if this attribute is present and the appropriate hyphenation dictionary is available. *In XML, the xml:lang attribute must be used.*
+- **The rules defining how hyphenation is performed are not explicitly defined by the specification, so the exact hyphenation may vary from browser to browser.**
+- The hyphens property is specified as a single keyword value:
+  - `none`: Words are not broken at line breaks, even if characters inside the words suggest line break points. Lines will only wrap at whitespace.
+  - `manual`: Words are broken for line-wrapping only where characters inside the word suggest line break opportunities. See Suggesting line break opportunities below for details.
+  - `auto`: The browser is free to automatically break words at appropriate hyphenation points, following whatever rules it chooses. However, suggested line break opportunities (see Suggesting line break opportunities below) will override automatic break point selection when present.
+    - The auto setting's behavior depends on the language being properly tagged to select the appropriate hyphenation rules. You must specify a language using the lang HTML attribute to guarantee that automatic hyphenation is applied in that language.
+
+  ```css
+    /* Keyword values */
+    hyphens: none;
+    hyphens: manual;
+    hyphens: auto;
+
+    /* Global values */
+    hyphens: inherit;
+    hyphens: initial;
+    hyphens: revert;
+    hyphens: unset;
+  ```
+
+#### Suggesting line break opportunities
+
+- There are two Unicode characters used to manually specify potential line break points within text:
+  - **`U+2010 (HYPHEN)`**: The **"hard" hyphen character** indicates a visible line break opportunity. Even if the line is not actually broken at that point, the hyphen is still rendered.
+  - **`U+00AD (SHY)`**: An **invisible, "soft" hyphen.** This character is **not rendered visibly; instead, it marks a place where the browser should break the word if hyphenation is necessary**. In HTML, use `&shy;` to insert a soft hyphen.
+
+#### The `<wbr>` element
+  - **The `<wbr>` HTML element represents a word break opportunity—a position within text where the browser may optionally break a line**, though its line-breaking rules would not otherwise create a break at that location.
+  - **The element does not introduce a hyphen at the line break point.**
+  - *This element was first implemented in Internet Explorer 5.5 and was officially defined in HTML5.*
