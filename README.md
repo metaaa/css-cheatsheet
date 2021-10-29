@@ -500,9 +500,9 @@ swapped out for a class selector. So the winning specificity is 33 vs. 23 and 24
 
 #### Positioning the background image
 
-- Background-position is a shorthand for background-position-x and background-position-y, which allow you to set the different axis position values individually.
-- The background-position property allows you to choose the position in which the background image appears on the box it is applied to. This uses a coordinate system in which the top-left-hand corner of the box is (0,0), and the box is positioned along the horizontal (x) and vertical (y) axes.
-- The default background-position value is (0,0).
+- Background-position is a shorthand for `background-position-x` and `background-position-y`, which allow you to set the different axis position values individually.
+- The `background-position` property allows you to choose the position in which the background image appears on the box it is applied to. This uses a coordinate system in which the top-left-hand corner of the box is (0,0), and the box is positioned along the horizontal (x) and vertical (y) axes.
+- The default `background-position` value is (0,0).
 - You can use keywords, length, percentages, mixed values, and a 4-value syntax in order to indicate a distance from certain edges of the box — the length unit, in this case, is an offset from the value that precedes it.
   ```css
   /* Keyword values */
@@ -900,3 +900,102 @@ border-image: unset;
   - **The `<wbr>` HTML element represents a word break opportunity—a position within text where the browser may optionally break a line**, though its line-breaking rules would not otherwise create a break at that location.
   - **The element does not introduce a hyphen at the line break point.**
   - *This element was first implemented in Internet Explorer 5.5 and was officially defined in HTML5.*
+
+## CSS values and units
+
+- **Every property used in CSS has a value type defining the set of values that are allowed for that property.**
+- There are various value types:
+
+Data type	| Description
+----------|------------
+`<integer>	`| An `<integer>` is a whole number such as 1024 or -55.
+`<number>`	| A `<number>` represents a decimal number — it may or may not have a decimal point with a fractional component. For example, 0.255, 128, or -1.2.
+`<dimension>`	| A `<dimension>` is a `<number>` with a unit attached to it. For example, 45deg, 5s, or 10px. `<dimension>` is an umbrella category that includes the `<length>`, `<angle>`, `<time>`, and `<resolution>` types.
+`<percentage>`	| A `<percentage> `represents a fraction of some other value. For example, 50%. Percentage values are always relative to another quantity. For example, an element's length is relative to its parent element's length.
+
+- **There are two types of lengths used in CSS — relative and absolute.**
+- Absolute length units:
+  - They are not relative to anything else, and are generally considered to always be the same size.
+
+  Unit | Name | Equivalent to
+  -----|------|--------------
+  cm | Centimeters | 1cm = 38px = 25/64in
+  mm | Millimeters | 1mm = 1/10th of 1cm
+  Q | Quarter-millimeters | 1Q = 1/40th of 1cm
+  in | Inches | 1in = 2.54cm = 96px
+  pc | Picas | 1pc = 1/6th of 1in
+  pt | Points | 1pt = 1/72th of 1in
+  px | Pixels | 1px = 1/96th of 1in
+
+- Relative length units:
+  - **Relative length units are relative to something** else, **perhaps the size of the parent element's font, or the size of the viewport**. **The benefit of using** relative units is that with some careful planning you can make it so the size of text or other **elements scales relative to everything else on the page**.
+
+Unit | Relative to
+-----|------------
+em | Font size of the parent, in the case of typographical properties like fontsize, and font size of the element itself, in the case of other properties like width.
+ex | x-height of the element's font.
+ch | The advance measure (width) of the glyph "0" of the element's font.
+rem | Font size of the root element.
+lh | Line height of the element.
+vw | 1% of the viewport's width.
+vh | 1% of the viewport's height.
+vmin | 1% of the viewport's smaller dimension.
+vmax | 1% of the viewport's larger dimension.
+
+- **The em unit** means "my parent element's font-size" in the case of typography. The `<li>` elements inside the `<ul>` with a class of ems take their sizing from their parent. So each successive level of nesting gets progressively larger, as each has its font size set to 1.3em — 1.3 times its parent's font size.
+- **The rem unit** means "The root element's font-size". (rem stands for "root em".) The `<li>` elements inside the `<ul>` with a class of rems take their sizing from the root element (`<html>`). This means that each successive level of nesting does not keep getting larger.
+- **Percentages are always set relative to some other value**. If you use a percentage for a width value, it will be a percentage of the width of the parent.
+- **There are places where you use strings** in CSS. For example when specifying generated content. In this case, **the value is quoted** to demonstrate that it is a string. 
+- **Functions** are usually associated with languages like JavaScript, Python, or C++, but they **do exist in CSS too, as property values.**
+  - A value that behaves more like something you might find in a traditional programming language is the **`calc()`** CSS function. This function **gives you the ability to do simple calculations inside your CSS**.
+
+### Specifying colors
+
+- **The standard color system available in modern computers is 24 bit**, which allows the display of about 16.7 million distinct colors via a combination of different red, green and blue channels with 256 different values per channel (256 x 256 x 256 = 16,777,216).
+  - Color keywords:
+    - they are a simple and understandable way of specifying color.
+  - Hexadecimal RGB values:
+    - **Each hex value consists of a hash/pound symbol (#) followed by six hexadecimal numbers, each of which can take one of 16 values between 0 and f** (which represents 15) — so 0123456789abcdef. Each pair of values represents one of the channels — red, green and blue — and allows us to specify any of the 256 available values for each (16 x 16 = 256.)  
+  - RGB and RGBA values:
+    - **An RGB value is a function — `rgb()` — which is given three parameters that represent the red, green, and blue channel values of the colors**, in much the same way as hex values. The difference with RGB is that each channel is represented not by two hex digits, but by a decimal number between 0 and 255.
+    - **RGBA colors work in exactly the same way as RGB colors, and so you can use any RGB values. However, there is a fourth value that represents the alpha channel of the color, which controls opacity.** If you set this value to 0 it will make the color fully transparent, whereas 1 will make it fully opaque. Values in between give you different levels of transparency.
+    - **When you use `opacity` you make the element and everything inside it opaque, whereas using RGBA colors only makes the color you are specifying opaque.**
+    - As of CSS Colors Level 4, `rgba()` is an alias for `rgb()` and `hsla()` is an alias for `hsl()`. *In browsers that implement the Level 4 standard, they accept the same parameters and behave the same way. So for example both `rgba()` and `rgb()` accept colors with and without alpha channel values.*
+  - HSL and HSLA values:
+    - **Slightly less well-supported than RGB** is the HSL color model (not supported on old versions of IE), which was implemented after much interest from designers. **Instead of red, green, and blue values, the hsl() function accepts hue, saturation, and lightness values, which are used to distinguish between the 16.7 million colors**, but in a different way:
+      - **`Hue`**: The base shade of the color. This takes a value between 0 and 360, representing the angles around a color wheel.
+      - **`Saturation`**: How saturated is the color? This takes a value from 0–100%, where 0 is no color (it will appear as a shade of grey), and 100% is full color saturation
+      - **`Lightness`**: How light or bright is the color? This takes a value from 0–100%, where 0 is no light (it will appear completely black) and 100% is full light (it will appear completely white)
+
+## Sizing items in CSS
+
+### The natural or intrinsic size of things
+
+- **HTML Elements have a natural size, set before they are affected by any CSS.** A straightforward example is an image. An image file contains sizing information, described as its intrinsic size. This size is determined by the image itself, not by any formatting we happen to apply.
+- An empty `<div>`, on the other hand, has no size of its own. If you add a `<div>` to your HTML with no content, then give it a border as we did with the image, you will see a line on the page. This is the collapsed border on the element — there is no content to hold it open.
+
+### Setting a specific size
+
+- **When a size is given to an element** (the content of which then needs to fit into that size) **we refer to it as an extrinsic size.**
+
+### Using percentages
+
+- In many ways, **percentages act like length units**, and they can often be used interchangeably with lengths. *When using a percentage you need to be aware what it is a percentage of*. In the case of a box inside another container, if you give the child box a percentage width it will be a percentage of the width of the parent container.
+- This is because percentages resolve against the size of the containing block. With no percentage applied our `<div>` would take up 100% of the available space, as it is a block level element.
+
+### Percentage margins and padding
+
+- **When you use margin and padding set in percentages, the value is calculated from the inline size of the containing block — therefore the width when working in a horizontal language.**
+
+### min- and max- sizes
+
+- In addition to giving things a fixed size, **we can ask CSS to give an element a minimum or a maximum size.** If you have a box that might contain a variable amount of content, and you always want it to be at least a certain height, you could set the `min-height` property on it. The box will always be at least this height, but will then grow taller if there is more content than the box has space for at its minimum height.
+- A common use of `max-width` is to cause images to scale down if there is not enough space to display them at their intrinsic width while making sure they don't become larger than that width.
+- **This technique is used to make images responsive**, so that when viewed on a smaller device they scale down appropriately. **You should, however, not use this technique to load really large images and then scale them down in the browser. Images should be appropriately sized to be no larger than they need to be for the largest size they are displayed in the design.** Downloading overly large images will cause your site to become slow, and it can cost users more money if they are on a metered connection.
+
+### Viewport units
+
+- **The viewport** — which is the visible area of your page in the browser you are using to view a site — **also has a size.** In CSS we have units which relate to the size of the viewport — the `vw` unit for viewport width, and `vh` for viewport height. **Using these units you can size something relative to the viewport of the user.**
+
+- 1vh is equal to 1% of the viewport height, and 1vw is equal to 1% of the viewport width. You can use these units to size boxes, but also text. 
+- **If you change the vh and vw values this will change the size of the box or font; changing the viewport size will also change their sizes because they are sized relative to the viewport.**
