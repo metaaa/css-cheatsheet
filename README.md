@@ -999,3 +999,126 @@ vmax | 1% of the viewport's larger dimension.
 
 - 1vh is equal to 1% of the viewport height, and 1vw is equal to 1% of the viewport width. You can use these units to size boxes, but also text. 
 - **If you change the vh and vw values this will change the size of the box or font; changing the viewport size will also change their sizes because they are sized relative to the viewport.**
+
+## Images, media, and form elements
+
+### Replaced elements
+
+- **Images and video are described as replaced elements. This means that CSS cannot affect the internal layout of these elements — only their position on the page amongst other elements.**
+- **Certain replaced elements, such as images and video, are also described as having an aspect ratio. This means that it has a size in both the horizontal (x) and vertical (y) dimensions, and will be displayed using the intrinsic dimensions of the file by default.**
+
+### Replaced elements in layout
+
+- When using various CSS layout techniques on replaced elements, you may well find that they behave slightly differently from other elements. For example, in a flex or grid layout elements are stretched by default to fill the entire area. Images will not stretch, and instead will be aligned to the start of the grid area or flex container.
+
+### Sizing images
+
+- A common technique is to make the max-width of an image 100%. This will enable the image to become smaller in size than the box but not larger. This technique will also work with other replaced elements such as `<video>`s, or `<iframe>`s.
+- **The `object-fit` CSS property sets how the content of a replaced element, such as an `<img>` or `<video>`, should be resized to fit its container.**
+  - The `object-fit` property is specified as a single keyword:
+    - **`contain`**: The replaced content is scaled to maintain its aspect ratio while fitting within the element’s content box. The entire object is made to fill the box, while preserving its aspect ratio, so the object will be "letterboxed" if its aspect ratio does not match the aspect ratio of the box.
+    - **`cover`**: The replaced content is sized to maintain its aspect ratio while filling the element’s entire content box. If the object's aspect ratio does not match the aspect ratio of its box, then the object will be clipped to fit.
+    - **`fill`**: The replaced content is sized to fill the element’s content box. The entire object will completely fill the box. If the object's aspect ratio does not match the aspect ratio of its box, then the object will be stretched to fit.
+    - **`none`**: The replaced content is not resized.
+    - **`scale-down`**: The content is sized as if none or contain were specified, whichever would result in a smaller concrete object size.
+  - The `object-position` CSS property specifies the alignment of the selected replaced element's contents within the element's box. Areas of the box which aren't covered by the replaced element's object will show the element's background.
+    - The position can be set so that the replaced element is drawn outside its box.
+
+    ```css
+    /* <position> values */
+    object-position: center top;
+    object-position: 100px 50px;
+
+    /* Global values */
+    object-position: inherit;
+    object-position: initial;
+    object-position: revert;
+    object-position: unset;
+    ```
+
+### Responsive images
+
+#### WHY?
+
+- To display a cropped version of the image which displays the important details of the image when the site is viewed on a narrow screen. The general problem whereby you want to serve different cropped images in that way, for various layouts, is commonly known as **the art direction problem.**
+- There is no need to embed such large images on the page if it is being viewed on a mobile screen. And conversely, a small raster image starts to look grainy when displayed larger than its original size (a raster image is a set number of pixels wide and a set number of pixels tall, as we saw when we looked at vector graphics). **This is called the resolution switching problem.**
+- *This kind of problem didn't exist when the web first existed, in the early to mid 90s — back then the only devices in existence to browse the Web were desktops and laptops, so browser engineers and spec writers didn't even think to implement solutions. Responsive image technologies were implemented recently to solve the problems indicated above by letting you offer the browser several image files, either all showing the same thing but containing different numbers of pixels (resolution switching), or different images suitable for different space allocations (art direction).*
+
+@TODO CSS WAY: https://cloudfour.com/thinks/responsive-images-101-part-8-css-images/
+
+@TODO HTML WAY: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+### Resolution switching: Different sizes
+
+- We can however use `srcset` and `sizes` — to provide several additional source images along with hints to help the browser pick the right one.
+
+### Form elements
+
+- Many form controls are added to your page by way of the `<input>` element — this defines simple form fields such as text inputs, through to more complex fields added in HTML5 such as color and date pickers. There are some additional elements, such as `<textarea>` for multiline text input, and also elements used to contain and label parts of forms such as `<fieldset>` and `<legend>`.
+- HTML5 also contains attributes that enable web developers to indicate which fields are required, and even the type of content that needs to be entered. If the user enters something unexpected, or leaves a required field blank, the browser can show an error message. Different browsers vary with one another in how much styling and customization they allow for such items.
+
+#### Styling text input elements
+
+- Elements that allow for text input, such as `<input type="text">`, and the more specific `<input type="email">`, and the `<textarea>` element are quite easy to style and tend to behave just like other boxes on your page. The default styling of these elements will differ, however, based on the operating system and browser that your user visits the site with.
+- **You should take care when changing the styling of form elements to make sure it is still obvious to the user they are form elements. You could create a form input with no borders and background that is almost indistinguishable from the content around it, but this would make it very hard to recognise and fill in.**
+- Many of the more complex input types are rendered by the operating system and are inaccessible to styling. You should therefore always assume that forms are going to look quite different for different visitors and test complex forms in a number of browsers.
+- **Inheritance and form elements:**
+  - **In some browsers, form elements do not inherit font styling by default.** Therefore, if you want to be sure that your form fields use the font defined on the body, or on a parent element, you should add this rule to your CSS.
+
+    ```css
+    button,
+    input,
+    select,
+    textarea {
+      font-family : inherit;
+      font-size : 100%;
+    }
+    ```
+
+- **Form elements and box-sizing:**
+  - Across browsers, form elements use different box sizing rules for different widgets.
+  - For consistency, it is a good idea to set margins and padding to 0 on all elements, then add these back in when styling particular controls:
+
+  ```css
+  button,
+  input,
+  select,
+  textarea {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  ```
+
+- In addition to the rules mentioned above, you should also set overflow: auto on `<textarea>`s to stop IE showing a scrollbar when there is no need for one:
+
+```css
+textarea {
+  overflow: auto;
+}
+```
+
+- Normalizing stylesheets are used by many developers to create a set of baseline styles to use on all projects. Making sure that anything different across browsers is set to a consistent default before you do your own work on the CSS. They are not as important as they once were, as browsers are typically more consistent than in the past.
+
+@TODO: https://internetingishard.netlify.app/html-and-css/index.html
+
+## Styling Tables
+
+- The table is nicely marked up, easily stylable, and accessible, thanks to features such as scope, `<caption>`, `<thead>`, `<tbody>`, etc.
+
+### Spacing and layout
+
+- The table-layout CSS property sets the algorithm used to lay out `<table> `cells, rows, and columns.
+- Values:
+  - **`auto`**: By default, most browsers use an automatic table layout algorithm. The widths of the table and its cells are adjusted to fit the content.
+  - **`fixed`**: Table and column widths are set by the widths of table and col elements or by the width of the first row of cells. Cells in subsequent rows do not affect column widths.
+
+**Under the "`fixed`" layout method, the entire table can be rendered once the first table row has been downloaded and analyzed. This can speed up rendering time over the "automatic" layout method, but subsequent cell content might not fit in the column widths provided.** Cells use the overflow property to determine whether to clip any overflowing content, but only if the table has a known width; otherwise, they won't overflow the cells.
+
+- A `border-collapse` value of collapse is standard best practice for any table styling effort. By default, when you set borders on table elements, they will all have spacing between them.
+- The `border-collapse` CSS property sets whether cells inside a `<table>` have shared or separate borders.
+- When cells are collapsed, the `border-style` value of `inset` behaves like `groove`, and `outset` behaves like `ridge`.
+- **When cells are separated, the distance between cells is defined by the `border-spacing` property.**
+- The `border-collapse` property is specified as a single keyword:
+  - **`collapse`**: Adjacent cells have shared borders (the collapsed-border table rendering model).
+  - **`separate`**: Adjacent cells have distinct borders (the separated-border table rendering model).
+- For designing table forders @see borders section about borders.
